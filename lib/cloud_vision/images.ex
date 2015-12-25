@@ -6,6 +6,8 @@ defmodule CloudVision.Images do
     case client |> CloudVision.request(:post, "/images:annotate", body) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         {:ok, body |> parse_body}
+      {:ok, %HTTPoison.Response{status_code: status_code, body: body}} when status_code >= 400 ->
+        {:error, body |> Dict.fetch "error"}
       {:error, %HTTPoison.Error{reason: reason}} ->
         {:error, reason}
     end
