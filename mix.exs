@@ -30,7 +30,6 @@ defmodule CloudVision.Mixfile do
     [
       {:httpoison, "~> 0.8.0"},
       {:poison, "~> 1.5"},
-      {:exjsx, "~> 3.2"},
       {:inflex, "~> 1.5.0"}
     ]
   end

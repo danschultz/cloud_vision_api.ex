@@ -1,24 +1,59 @@
-defmodule CloudVision.Response do
-  alias CloudVision.Face
-  alias CloudVision.EntityAnnotation
-  alias CloudVision.Status
+defmodule CloudVision.Feature do
+  alias __MODULE__
 
-  defstruct faces: nil, landmarks: nil, labels: nil, logos: nil, text: nil, safe_search: nil, error: nil
+  defstruct type: nil, max_results: nil
 
-  def from_map(map) do
-    struct(__struct__,
-      for {key, val} <- map, into: %{} do
-        case key do
-          "error" -> {:error, Status.from_map(val)}
-          "face_annotations" -> {:faces, Enum.map(val, &Face.from_map(&1))}
-          "label_annotations" -> {:labels, Enum.map(val, &EntityAnnotation.from_map(&1))}
-          "landmark_annotations" -> {:landmarks, Enum.map(val, &EntityAnnotation.from_map(&1))}
-          "logo_annotations" -> {:logos, Enum.map(val, &EntityAnnotation.from_map(&1))}
-          "safe_search_annotation" -> {:safe_search, EntityAnnotation.from_map(val)}
-          "text_annotations" -> {:text, Enum.map(val, &EntityAnnotation.from_map(&1))}
-        end
-      end
-    )
+  def label(max_results \\ -1) do
+    %Feature{type: "LABEL_DETECTION", max_results: max_results}
+  end
+
+  def face(max_results \\ -1) do
+    %Feature{type: "FACE_DETECTION", max_results: max_results}
+  end
+
+  def landmark(max_results \\ -1) do
+    %Feature{type: "LANDMARK_DETECTION", max_results: max_results}
+  end
+
+  def logo(max_results \\ -1) do
+    %Feature{type: "LOGO_DETECTION", max_results: max_results}
+  end
+
+  def text(max_results \\ -1) do
+    %Feature{type: "TEXT_DETECTION", max_results: max_results}
+  end
+
+  def safe_search(max_results \\ -1) do
+    %Feature{type: "SAFE_SEARCH_DETECTION", max_results: max_results}
+  end
+
+  def unspecified(max_results \\ -1) do
+    %Feature{type: "TYPE_UNSPECIFIED", max_results: max_results}
+  end
+end
+
+
+defmodule CloudVision.Image do
+  alias __MODULE__
+
+  defstruct content: nil
+
+  def new(content) do
+    %Image{content: content}
+  end
+
+  def from_file(path) do
+    case File.read path do
+      {:ok, body} -> {:ok, body |> Base.encode64 |> Image.new}
+      {:error, reason} -> {:error, reason}
+    end
+  end
+
+  def from_file!(path) do
+    path
+      |> File.read!
+      |> Base.encode64
+      |> Image.new
   end
 end
 
