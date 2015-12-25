@@ -1,9 +1,10 @@
 defmodule CloudVision.Images do
+  alias CloudVision.Client
   alias CloudVision.Images.AnnotateResponse
 
   def annotate(client, requests) do
     body = %{"requests": requests}
-    case client |> CloudVision.request(:post, "/images:annotate", body) do
+    case client |> Client.request(:post, "/images:annotate", body) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         {:ok, body |> parse_body}
       {:ok, %HTTPoison.Response{status_code: status_code, body: body}} when status_code >= 400 ->
