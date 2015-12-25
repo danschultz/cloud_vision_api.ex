@@ -1,0 +1,3 @@
+defmodule CloudVision do
+
+end
