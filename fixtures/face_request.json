@@ -1,0 +1,31 @@
+[
+  {
+    "request": {
+      "body": "{\"requests\":[{\"image\":{\"content\":\"\"},\"features\":[{\"type\":\"FACE_DETECTION\",\"max_results\":-1}]}]}",
+      "headers": [],
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://vision.googleapis.com/v1alpha1/images:annotate?key="
+    },
+    "response": {
+      "body": "{\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The request cannot be identified with a client project. Please pass a valid API key with the request.\",\n    \"status\": \"PERMISSION_DENIED\"\n  }\n}\n",
+      "headers": {
+        "Vary": "X-Origin",
+        "Content-Type": "application/json; charset=UTF-8",
+        "Date": "Sat, 02 Jan 2016 06:58:11 GMT",
+        "Server": "ESF",
+        "Cache-Control": "private",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Content-Type-Options": "nosniff",
+        "Alternate-Protocol": "443:quic,p=1",
+        "Alt-Svc": "quic=\":443\"; ma=604800; v=\"30,29,28,27,26,25\"",
+        "Accept-Ranges": "none",
+        "Transfer-Encoding": "chunked"
+      },
+      "status_code": 403,
+      "type": "ok"
+    }
+  }
+]
