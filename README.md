@@ -1,5 +1,7 @@
 # Google Cloud Vision API
 
+[![Build Status](https://travis-ci.org/danschultz/cloud_vision_api.ex.svg)](https://travis-ci.org/danschultz/cloud_vision_api.ex)
+
 Elixir client for Google's Cloud Vision API. Highly experimental!
 
 ## Installation
