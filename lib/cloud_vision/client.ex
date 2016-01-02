@@ -22,7 +22,7 @@ defmodule CloudVision.Client do
   end
 
   def request(%Client{api_key: api_key}, method, endpoint, body) do
-    request(method, endpoint <> "?key=" <> api_key, body)
+    request(method, endpoint <> "?key=" <> api_key, body, [], timeout: 15000, recv_timeout: 15000)
   end
 
   defp api_uri do
