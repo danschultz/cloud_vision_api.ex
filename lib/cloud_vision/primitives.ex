@@ -110,7 +110,7 @@ defmodule CloudVision.BoundingPoly do
     struct(__struct__,
       for {key, val} <- map, into: %{} do
         case key do
-          "vertices" -> {:x, Enum.map(val, &Vertex.from_map(&1))}
+          "vertices" -> {:vertices, Enum.map(val, &Vertex.from_map(&1))}
         end
       end
     )
