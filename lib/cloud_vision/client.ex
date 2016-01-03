@@ -3,10 +3,13 @@ defmodule CloudVision.Client do
 
   use HTTPoison.Base
 
-  defstruct api_key: nil
+  defstruct api_key: nil, options: nil
 
-  def new(api_key) do
-    %Client{api_key: api_key}
+  def new(api_key, options \\ []) do
+    %Client{
+      api_key: api_key,
+      options: options ++ [timeout: 15000]
+    }
   end
 
   def process_url(url) do
@@ -21,8 +24,9 @@ defmodule CloudVision.Client do
     CloudVision.Json.decode! body
   end
 
-  def request(%Client{api_key: api_key}, method, endpoint, body) do
-    request(method, endpoint <> "?key=" <> api_key, body, [], timeout: 15000, recv_timeout: 15000)
+  def request(%Client{api_key: api_key, options: options}, method, endpoint, body) do
+    timeout = options[:timeout]
+    request(method, endpoint <> "?key=" <> api_key, body, [], timeout: timeout, recv_timeout: timeout)
   end
 
   defp api_uri do
