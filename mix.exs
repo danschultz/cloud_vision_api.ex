@@ -15,7 +15,7 @@ defmodule CloudVision.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     [
-      applications: [:logger, :httpoison],
+      applications: [:logger, :httpoison, :inflex, :poison],
       env: [
 				api_uri: "https://vision.googleapis.com/v1alpha1",
 			]
